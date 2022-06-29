@@ -1,32 +1,35 @@
 <template>
-  <div id="app">
-   <h1>{{ msg }}</h1>
-    <h2>{{ obj.name }}</h2>
-    <h3>{{ obj.age > 18 ? '成年' : '未成年' }}</h3>
-
-    <a v-bind:href="url">点击去百度</a>
-    <!-- 语法: :原生属性名="vue变量" -->
-    <img :src="imgUrl" />
-    <img :src="localImg">
+   <div @click="fatherFn">
+   <!-- vue对事件进行了修饰符设置, 在事件后面.修饰符名即可使用更多的功能 -->
+    <span @click.stop="one" href="http://www.baidu.com">.stop阻止事件冒泡</span>
+    <br>
+    <!-- href="http://www.baidu.com" -->
+    <a @click.prevent.stop  href="http://www.baidu.com">.prevent阻止默认行为</a>
+    <br>
+    <button @click.once="btn">.once程序运行期间, 只触发一次事件处理函数</button>
   </div>
 </template>
 
 <script>
-import imgObj from './assets/logo.png'
+
 
 export default {
   data() { // 格式固定, 定义vue数据之处
     return {  // key相当于变量名
-      msg: "hello, vue",
-      obj: {
-        name: "小vue",
-        age: 5,
-          },
-        url: 'http://www.baidu.com',
-        imgUrl: "http://yun.itheima.com/Upload/./Images/20210412/60741c11ab77b.jpg",
-        localImg: imgObj
+    
     }
       
+  },
+  methods: {
+    fatherFn(){
+      console.log("father被触发");
+    },
+    one () {
+     console.log('span click');
+    },
+    btn(){
+      console.log(1);
+    }
   }
 }
 </script>
